@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicador Web Prototipo</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #121212;
+            color: #FFFFFF;
+        }
+        header {
+            padding: 10px;
+            background: #1E1E1E;
+            width: 100%;
+            text-align: center;
+        }
+        canvas {
+            max-width: 90%;
+            margin: 20px auto;
+        }
+        .panel {
+            background: #1E1E1E;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            width: 90%;
+            max-width: 600px;
+            text-align: left;
+        }
+        .panel h3 {
+            margin: 0;
+            padding: 0 0 10px 0;
+            border-bottom: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Indicador Web</h1>
+    </header>
+
+    <canvas id="mainChart"></canvas>
+
+    <div class="panel">
+        <h3>Indicador MACD</h3>
+        <p>MACD: <span id="macdValue">0.00</span></p>
+        <p>EMA13: <span id="emaValue">0.00</span></p>
+        <p>Status: <span id="status">Neutro</span></p>
+    </div>
+
+    <div class="panel">
+        <h3>Indicador Preditivo</h3>
+        <p>Previsão: <span id="prediction">Neutro</span></p>
+    </div>
+
+    <script>
+        // Dados fictícios para o gráfico de velas
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Preço',
+                data: [120, 130, 125, 140, 150, 160, 155],
+                borderColor: '#39FF14',
+                backgroundColor: 'rgba(57, 255, 20, 0.1)',
+                fill: true,
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#FFFFFF'
+                        },
+                        grid: {
+                            color: '#333'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#FFFFFF'
+                        },
+                        grid: {
+                            color: '#333'
+                        }
+                    }
+                }
+            }
+        };
+
+        const mainChart = new Chart(
+            document.getElementById('mainChart'),
+            config
+        );
+
+        // Exibir valores dinâmicos nos painéis
+        document.getElementById('macdValue').innerText = "1.23";
+        document.getElementById('emaValue').innerText = "1.15";
+        document.getElementById('status').innerText = "Compra";
+        document.getElementById('prediction').innerText = "Alta";
+    </script>
+</body>
+</html>
